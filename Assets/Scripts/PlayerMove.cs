@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -43,9 +44,10 @@ public class PlayerMove : MonoBehaviour
                 break;
         }
         this.transform.position += offsetpos;
+
+        m_Raft0ffsetpos += offsetpos;
     }
-    // Update is called once per frame
-    void Update()
+    protected void InputUpdate()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -61,22 +63,58 @@ public class PlayerMove : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            SetActorMove (E_DirectionTye.Right);
+            SetActorMove(E_DirectionTye.Right);
         }
     }
+    Vector3 m_Raft0ffsetpos = Vector3.zero;
+    protected void UpdateRaft()
+    {
+        if(RaftObject == null)
+        {
+            return;
+        }
+        Vector3 actorpos = RaftObject.transform.position + m_Raft0ffsetpos; 
+        this.transform.position = actorpos;
+    }
+    void Update()
+    {
+        InputUpdate();
+        UpdateRaft();
 
+
+    }
+    [SerializeField]
+    protected Raft RaftObject = null;
+    protected Transform RaftCompareObj = null;
     public void OnTriggerEnter(Collider other)
     {
         Debug.LogFormat("OnTriggerEnter : {0}, {1}", other.name, other.tag);
+        if (other.tag.Contains("Raft"))
+        {
+            RaftObject = other.transform.parent.GetComponent<Raft>();
+            if(RaftObject != null)
+            {
+                RaftCompareObj = RaftObject.transform;
+                m_Raft0ffsetpos = this.transform.position - RaftObject.transform.position;
+            }
+            Debug.LogFormat("¶Â¸ñÅÀ´Ù : {0}, {1}", other.name, m_Raft0ffsetpos);
+            return;
+        }
         if (other.tag.Contains("Crash"))
         {
             Debug.LogFormat("ºÎµóÇû´Ù");
         }
     }
-
     public void OnTriggerExit(Collider other)
     {
-        
+        Debug.LogFormat("OnTriggerExit : {0}, {1}", other.name, other.tag);
+        if (other.tag.Contains("Raft") && RaftCompareObj == other.transform.parent)
+        {
+            RaftCompareObj = null;
+            RaftObject = null;
+            m_Raft0ffsetpos = Vector3.zero;
+        }
+         
     }
 
 }
