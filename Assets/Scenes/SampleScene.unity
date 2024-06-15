@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 406499027}
   - component: {fileID: 406499026}
   - component: {fileID: 406499025}
+  - component: {fileID: 406499028}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -166,7 +167,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 122
   m_CollisionDetection: 0
 --- !u!65 &406499026
 BoxCollider:
@@ -205,6 +206,20 @@ Transform:
   - {fileID: 1627128777}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &406499028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406499024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d74aca94e8d2d14dabfa0934b24a805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActorBody: {fileID: 406499025}
+  m_DirectionType: 0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,13 +374,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8268510538695112567, guid: da4b642261531794692087beac251c91, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -7527352000212169283, guid: da4b642261531794692087beac251c91, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: da4b642261531794692087beac251c91, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1796c8003b9a4444180197d18eabd829, type: 2}
+    - target: {fileID: -6411893790165140941, guid: da4b642261531794692087beac251c91, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: da4b642261531794692087beac251c91, type: 3}
       propertyPath: m_Name
       value: pizza_car_seperate_Z
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: da4b642261531794692087beac251c91, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4113687989237586589, guid: da4b642261531794692087beac251c91, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -519,8 +554,8 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 7.88
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -544,13 +579,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.40768605, y: -0.18339828, z: 0.0839566, w: 0.89056635}
+  m_LocalPosition: {x: 3.9, y: 19.61, z: -9.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 49.195, y: -23.273, z: 0}
 --- !u!1 &1214954850
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,9 +797,9 @@ GameObject:
   - component: {fileID: 1666404356}
   - component: {fileID: 1666404357}
   - component: {fileID: 1666404358}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Car
-  m_TagString: Untagged
+  m_TagString: Crash
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -800,7 +835,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -951,7 +986,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.44, z: -1.02}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 20.86}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1694873962}
