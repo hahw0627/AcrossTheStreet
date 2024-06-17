@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Car : MonoBehaviour
@@ -21,6 +22,13 @@ public class Car : MonoBehaviour
         if(this.transform.localPosition.x >= RangeDestroy)
         {
             GameObject.Destroy(this.gameObject);
+        }
+     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            GameManager.instance.GameOver();
         }
     }
 }
