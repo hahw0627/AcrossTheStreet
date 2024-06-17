@@ -219,6 +219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ActorBody: {fileID: 406499025}
+  EnvironmentMapManagerCom: {fileID: 1865683936}
   m_DirectionType: 0
   RaftObject: {fileID: 0}
 --- !u!1 &545895934
@@ -640,7 +641,7 @@ MonoBehaviour:
   CloneTarget: {fileID: 1226519366}
   GenerationPos: {fileID: 2077126472}
   GenerationPersent: 25
-  CloneDelaySec: 1
+  CloneDelaySec: 2
 --- !u!1001 &827768979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1526,13 +1527,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f369b50aea11144bc61079c7f1dd30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnvioronmentObjectArray:
-  - {fileID: 1506306358}
-  - {fileID: 848608945}
-  - {fileID: 753794222}
-  ParentTransform: {fileID: 0}
+  DefaultRoad: {fileID: 848608947}
+  WaterRoad: {fileID: 753794224}
+  GrassRoad: {fileID: 1506306360}
+  ParentTransform: {fileID: 1361397294}
   MinPosZ: -20
   MaxPosZ: 20
+  FrontOffsetPosZ: 20
+  BackOffsetPosZ: 10
+  m_DeleteLine: 10
+  m_BackOffetLineCount: 30
 --- !u!4 &1865683937
 Transform:
   m_ObjectHideFlags: 0

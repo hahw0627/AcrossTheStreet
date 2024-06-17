@@ -6,12 +6,14 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public Rigidbody ActorBody = null;
-
+    public EnvironmentMapManager EnvironmentMapManagerCom = null;
     // Start is called before the first frame update
     void Start()
     {
         string[] templayer = new string[] { "Plant" };
         m_TreeLayerMask = LayerMask.GetMask(templayer);
+
+        EnvironmentMapManagerCom.UpdateFowardNBackMove((int)this.transform.position.z);
     }
     public enum E_DirectionTye
     {
@@ -96,8 +98,9 @@ public class PlayerMove : MonoBehaviour
                 break;
         }
         this.transform.position += offsetpos;
-
         m_Raft0ffsetpos += offsetpos;
+
+        EnvironmentMapManagerCom.UpdateFowardNBackMove((int)this.transform.position.z);
     }
     protected void InputUpdate()
     {
