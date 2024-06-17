@@ -10,34 +10,86 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        string[] templayer = new string[] { "Plant" };
+        m_TreeLayerMask = LayerMask.GetMask(templayer);
     }
     public enum E_DirectionTye
     {
         Up = 0,
-        Down = 1,
-        Left = 2,
-        Right = 3,
+        Down,
+        Left,
+        Right
     }
     [SerializeField]
     protected E_DirectionTye m_DirectionType = E_DirectionTye.Up;
+    protected int m_TreeLayerMask = -1;
+
+    protected bool ISCheckDierectionViewMove(E_DirectionTye p_movetype)
+    {
+        Vector3 direction = Vector3.zero;
+
+        switch (p_movetype)
+        {
+            case E_DirectionTye.Up:
+                {
+                    direction = Vector3.forward;
+                }
+                break;
+            case E_DirectionTye.Down:
+                {
+                    direction = Vector3.back;
+                }
+                break;
+            case E_DirectionTye.Left:
+                {
+                    direction = Vector3.left;
+                }
+                break;
+            case E_DirectionTye.Right:
+                {
+                    direction = Vector3.right;
+                }
+                break;
+            default:
+                Debug.LogErrorFormat("SetActorMove Error : {0}", p_movetype);
+                break;
+        }
+        RaycastHit hitobj;
+        if (Physics.Raycast(this.transform.position, direction, out hitobj, 1.0f, m_TreeLayerMask))
+        {
+            return false;
+        }
+        return true;
+    }
     protected void SetActorMove(E_DirectionTye p_movetype)
     {
+        if (!ISCheckDierectionViewMove(p_movetype))
+        {
+            return;
+        }
         Vector3 offsetpos = Vector3.zero;
 
         switch(p_movetype)
         {
             case E_DirectionTye.Up:
-                offsetpos = Vector3.forward;
+                {
+                    offsetpos = Vector3.forward;
+                }
                 break;
             case E_DirectionTye.Down:
-                offsetpos = Vector3.back;
+                {
+                    offsetpos = Vector3.back;
+                }
                 break;
             case E_DirectionTye.Left:
-                offsetpos = Vector3.left;
+                {
+                    offsetpos = Vector3.left;
+                }
                 break;
             case E_DirectionTye.Right:
-                offsetpos = Vector3.right;
+                {
+                    offsetpos = Vector3.right;
+                }
                 break;
             default:
                 Debug.LogErrorFormat("SetActorMove Error : {0}", p_movetype);
