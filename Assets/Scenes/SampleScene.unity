@@ -221,6 +221,7 @@ MonoBehaviour:
   ActorBody: {fileID: 406499025}
   EnvironmentMapManagerCom: {fileID: 1865683936}
   m_DirectionType: 0
+  ChildModel: {fileID: 1627128777}
   RaftObject: {fileID: 0}
 --- !u!1 &545895934
 GameObject:

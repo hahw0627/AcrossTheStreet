@@ -15,7 +15,7 @@ public class PlayerMove : MonoBehaviour
 
         EnvironmentMapManagerCom.UpdateFowardNBackMove((int)this.transform.position.z);
     }
-    public enum E_DirectionTye
+    public enum E_DirectionType
     {
         Up = 0,
         Down,
@@ -23,31 +23,31 @@ public class PlayerMove : MonoBehaviour
         Right
     }
     [SerializeField]
-    protected E_DirectionTye m_DirectionType = E_DirectionTye.Up;
+    protected E_DirectionType m_DirectionType = E_DirectionType.Up;
     protected int m_TreeLayerMask = -1;
 
-    protected bool ISCheckDierectionViewMove(E_DirectionTye p_movetype)
+    protected bool ISCheckDierectionViewMove(E_DirectionType p_movetype)
     {
         Vector3 direction = Vector3.zero;
 
         switch (p_movetype)
         {
-            case E_DirectionTye.Up:
+            case E_DirectionType.Up:
                 {
                     direction = Vector3.forward;
                 }
                 break;
-            case E_DirectionTye.Down:
+            case E_DirectionType.Down:
                 {
                     direction = Vector3.back;
                 }
                 break;
-            case E_DirectionTye.Left:
+            case E_DirectionType.Left:
                 {
                     direction = Vector3.left;
                 }
                 break;
-            case E_DirectionTye.Right:
+            case E_DirectionType.Right:
                 {
                     direction = Vector3.right;
                 }
@@ -63,7 +63,27 @@ public class PlayerMove : MonoBehaviour
         }
         return true;
     }
-    protected void SetActorMove(E_DirectionTye p_movetype)
+    public Transform ChildModel = null;  
+    void SetDirectionRot(E_DirectionType p_movetype)
+    {
+        switch(p_movetype)
+        {
+            case E_DirectionType.Up:
+                ChildModel.rotation = Quaternion.identity;
+                break;
+            case E_DirectionType.Down:
+                ChildModel.rotation = Quaternion.Euler(0, 180, 0);
+                break;
+            case E_DirectionType.Left:
+                ChildModel.rotation = Quaternion.Euler(0, -90, 0);
+                break;
+            case E_DirectionType.Right:
+                ChildModel.rotation = Quaternion.Euler(0, 90, 0);
+                break;
+        }
+    }
+
+    protected void SetActorMove(E_DirectionType p_movetype)
     {
         if (!ISCheckDierectionViewMove(p_movetype))
         {
@@ -73,22 +93,22 @@ public class PlayerMove : MonoBehaviour
 
         switch(p_movetype)
         {
-            case E_DirectionTye.Up:
+            case E_DirectionType.Up:
                 {
                     offsetpos = Vector3.forward;
                 }
                 break;
-            case E_DirectionTye.Down:
+            case E_DirectionType.Down:
                 {
                     offsetpos = Vector3.back;
                 }
                 break;
-            case E_DirectionTye.Left:
+            case E_DirectionType.Left:
                 {
                     offsetpos = Vector3.left;
                 }
                 break;
-            case E_DirectionTye.Right:
+            case E_DirectionType.Right:
                 {
                     offsetpos = Vector3.right;
                 }
@@ -97,6 +117,9 @@ public class PlayerMove : MonoBehaviour
                 Debug.LogErrorFormat("SetActorMove Error : {0}", p_movetype);
                 break;
         }
+
+        SetDirectionRot(p_movetype);
+
         this.transform.position += offsetpos;
         m_Raft0ffsetpos += offsetpos;
 
@@ -106,19 +129,19 @@ public class PlayerMove : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            SetActorMove(E_DirectionTye.Up);
+            SetActorMove(E_DirectionType.Up);
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            SetActorMove(E_DirectionTye.Down);
+            SetActorMove(E_DirectionType.Down);
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            SetActorMove(E_DirectionTye.Left);
+            SetActorMove(E_DirectionType.Left);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            SetActorMove(E_DirectionTye.Right);
+            SetActorMove(E_DirectionType.Right);
         }
     }
     Vector3 m_Raft0ffsetpos = Vector3.zero;
